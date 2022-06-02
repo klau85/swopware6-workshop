@@ -1,4 +1,4 @@
 .idea/
 src/vendor/
-src/var/cache/
-src/var/log/
+src/var/cache/*
+src/var/log/*
