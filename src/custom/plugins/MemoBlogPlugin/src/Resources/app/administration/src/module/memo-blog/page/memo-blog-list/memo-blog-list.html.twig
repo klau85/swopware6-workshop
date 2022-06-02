@@ -1,0 +1,148 @@
+{% block memo_blog_list %}
+    <sw-page class="memo-blog-list">
+
+        {% block memo_blog_list_search_bar %}
+            <template #search-bar>
+                <sw-search-bar initialSearchType="memo_blog"
+                               :initialSearch="term"
+                               @search="onSearch">
+                </sw-search-bar>
+            </template>
+        {% endblock %}
+
+        {% block memo_blog_list_smart_bar_header %}
+            <template #smart-bar-header>
+                {% block memo_blog_list_smart_bar_header_title %}
+                    <h2>
+                        {% block memo_blog_list_smart_bar_header_title_text %}
+                            {{ $t('memo-blog.general.title') }}
+                        {% endblock %}
+
+                        {% block memo_blog_list_smart_bar_header_amount %}
+                            <span v-if="!isLoading" class="sw-page__smart-bar-amount">
+                                ({{ total }})
+                            </span>
+                        {% endblock %}
+                    </h2>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        {% block memo_blog_list_smart_bar_actions %}
+            <template #smart-bar-actions>
+                {% block memo_blog_list_smart_bar_actions_add %}
+                    <sw-button :routerLink="{ name: 'memo.blog.create' }" variant="primary">
+                        {{ $tc('memo-blog.button.add') }}
+                    </sw-button>
+                {% endblock %}
+            </template>
+        {% endblock %}
+
+        <template #content>
+            {% block memo_blog_list_content %}
+                <div class="memo-blog-list__content">
+
+                    {% block memo_blog_list_grid %}
+                        <sw-entity-listing ref="memoBlogGrid"
+                                           class="memo-blog-list-grid"
+                                           detailRoute="memo.blog.detail"
+                                           :items="blogs"
+                                           :columns="columns"
+                                           :repository="repository"
+                                           :showSelection="false"
+                                           :isLoading="isLoading"
+                                           :allowInlineEdit="true"
+                                           @inline-edit-save="onInlineEditSave"
+                                           @update-records="updateTotal"
+                        >
+                            {% block memo_blog_list_grid_columns %}
+                                {% block memo_blog_list_grid_columns_name %}
+                                    <template #column-name="{ item, compact, isInlineEdit }">
+
+                                        {% block memo_blog_list_grid_inline_edit_name %}
+                                            <template v-if="isInlineEdit">
+                                                <sw-text-field class="memo-blog-list__inline-edit-last-name"
+                                                               v-model="item.name"
+                                                               :size="compact ? 'small' : 'default'">
+                                                </sw-text-field>
+                                            </template>
+                                        {% endblock %}
+
+                                        {% block memo_blog_list_grid_columns_name_link %}
+                                            <router-link v-else :to="{ name: 'memo.blog.detail.base', params: { id: item.id }, query: { edit: false }}">
+                                                {{ item.name }}
+                                            </router-link>
+                                        {% endblock %}
+                                    </template>
+                                {% endblock %}
+
+                                {% block memo_blog_list_grid_columns_date %}
+                                    <template #column-date="{ item, compact, isInlineEdit }">
+
+                                        {% block memo_blog_list_grid_columns_date_content %}
+                                            {{ item.date | date }}
+                                        {% endblock %}
+                                    </template>
+                                {% endblock %}
+
+
+                                {% block memo_blog_list_grid_columns_active %}
+                                    <template #column-active="{ item, isInlineEdit }">
+                                        {% block memo_blog_list_grid_columns_active_inline_edit %}
+                                            <template v-if="isInlineEdit">
+                                                <sw-checkbox-field v-model="item.active"></sw-checkbox-field>
+                                            </template>
+                                        {% endblock %}
+
+                                        {% block memo_blog_list_grid_columns_active_content %}
+                                            <template v-else>
+                                                <sw-icon v-if="item.active" name="small-default-checkmark-line-medium" small class="is--active"></sw-icon>
+                                                <sw-icon v-else name="small-default-x-line-medium" small class="is--inactive"></sw-icon>
+                                            </template>
+                                        {% endblock %}
+                                    </template>
+                                {% endblock %}
+
+
+                                {% block memo_blog_list_grid_columns_actions %}
+                                    <template #detail-action="{ item }">
+                                        {% block memo_blog_list_grid_columns_actions_detail %}
+                                            <sw-context-menu-item class="sw-entity-listing__context-menu-edit-action"
+                                                                  :routerLink="{ name: 'memo.blog.detail.base', params: { id: item.id }, query: { edit: true }}">
+                                                {{ $tc('memo-blog.list.contextMenu.edit') }}
+                                            </sw-context-menu-item>
+                                        {% endblock %}
+                                    </template>
+
+                                {% endblock %}
+                            {% endblock %}
+                        </sw-entity-listing>
+                    {% endblock %}
+
+                    {% block memo_blog_list_empty_state %}
+                        <sw-empty-state v-if="!isLoading && !total" :title="$tc('memo-blog.list.empty')"></sw-empty-state>
+                    {% endblock %}
+
+                    {% block memo_blog_list_grid_loader %}
+                        <sw-loader v-if="isLoading"></sw-loader>
+                    {% endblock %}
+                </div>
+            {% endblock %}
+        </template>
+
+        {% block sw_review_list_sidebar %}
+            <template #sidebar>
+                <sw-sidebar>
+
+                    {% block sw_review_list_sidebar_refresh %}
+                        <sw-sidebar-item
+                            icon="default-arrow-360-left"
+                            :title="$tc('memo-blog.list.titleSidebarItemRefresh')"
+                            @click="onRefresh"
+                        />
+                    {% endblock %}
+                </sw-sidebar>
+            </template>
+        {% endblock %}
+    </sw-page>
+{% endblock %}

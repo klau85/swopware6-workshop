@@ -1,0 +1,27 @@
+{% block memo_blog_detail_product %}
+    <div class="memo-blog-detail-product">
+        {% block memo_blog_detail_product_info_holder %}
+            <div class="memo-blog-detail-product__info-holder">
+
+                <template v-if="!blogEditMode">
+                    {% block memo_blog_detail_product_info_card %}
+                        association details here
+{#                        <sw-card :title="blog.name">#}
+{#                            <sw-time-ago :date="blog.date"/>#}
+{#                            <div v-html="blog.text"></div>#}
+{#                        </sw-card>#}
+                    {% endblock %}
+                </template>
+
+                <template v-else>
+                    {% block memo_blog_detail_product_form %}
+                        <sw-many-to-many-assignment-card :entityCollection="blog.products"
+                                                         :columns="productColumns"
+                                                         :localMode="blog.isNew()"
+                        />
+                    {% endblock %}
+                </template>
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

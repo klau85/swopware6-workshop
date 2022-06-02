@@ -1,0 +1,30 @@
+{% block sw_cms_element_blog_newest_config %}
+    <div class="sw-cms-el-config-blog-newest">
+        {% block sw_cms_element_blog_newest_config_blog_select %}
+            <sw-entity-single-select
+                    ref="cmsBlogSelection"
+                    :label="$tc('sw-cms.elements.featured-auction.config.auction.label')"
+                    :placeholder="$tc('sw-cms.elements.featured-auction.config.auction.placeholder')"
+                    entity="memo_blog"
+                    @change="onBlogChange"
+                    v-model="element.config.blog.value">
+
+                <template #selection-label-property="{ item }">
+                    {{ item.name }}
+                </template>
+
+                <template #result-item="{ item, index }">
+                    <slot name="result-item" v-bind="{ item, index }">
+                        <li is="sw-select-result" v-bind="{ item, index }">
+                            {% block sw_entity_single_select_base_results_list_result_label %}
+                                <span class="sw-select-result__result-item-text">
+                                    {{ item.name }}
+                                 </span>
+                            {% endblock %}
+                        </li>
+                    </slot>
+                </template>
+            </sw-entity-single-select>
+        {% endblock %}
+    </div>
+{% endblock %}

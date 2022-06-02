@@ -1,0 +1,78 @@
+{% block memo_blog_detail %}
+    <sw-page class="memo-blog-detail">
+        {% block memo_blog_detail_header %}
+            <template #smart-bar-header>
+                <h2 v-if="blog">{{ blog.name }}</h2>
+            </template>
+        {% endblock %}
+
+        {% block memo_blog_detail_actions %}
+            <template #smart-bar-actions>
+                {% block memo_blog_detail_actions_edit %}
+                    <sw-button v-if="!editMode"
+                               class="memo-blog-detail__open-edit-mode-action"
+                               variant="primary"
+                               :disabled="isLoading"
+                               @click.prevent="onActivateBlogEditMode">
+                        {{ $tc('memo-blog.button.edit') }}
+                    </sw-button>
+                {% endblock %}
+
+                <template v-else>
+                    {% block memo_blog_detail_actions_cancel %}
+                        <sw-button :disabled="isLoading" @click="onAbortButtonClick">
+                            {{ $tc('memo-blog.button.cancel') }}
+                        </sw-button>
+                    {% endblock %}
+
+                    {% block memo_blog_detail_actions_save %}
+                        <sw-button-process
+                                class="memo-blog-detail__save-action"
+                                :isLoading="isLoading"
+                                :processSuccess="isSaveSuccessful"
+                                :disabled="isLoading"
+                                variant="primary"
+                                @process-finish="saveFinish"
+                                @click.prevent="onSave">
+                            {{ $tc('memo-blog.button.save') }}
+                        </sw-button-process>
+                    {% endblock %}
+                </template>
+            </template>
+        {% endblock %}
+
+        {% block memo_blog_detail_content %}
+            <template #content>
+                <sw-card-view>
+                    {% block memo_blog_detail_content_tabs %}
+                        <sw-tabs class="memo-blog-detail-page__tabs">
+                            {% block memo_blog_detail_content_tab_general %}
+                                <sw-tabs-item class="memo-blog-detail__tab-general"
+                                              :route="generalRoute"
+                                              :title="$tc('memo-blog.tabs.general')"
+                                              :hasError="memoBlogDetailBaseError">
+                                    {{ $tc('memo-blog.tabs.general') }}
+                                </sw-tabs-item>
+                            {% endblock %}
+                            {% block memo_blog_detail_content_tab_product %}
+                                <sw-tabs-item class="memo-blog-detail__tab-product"
+                                              :route="productRoute"
+                                              :title="$tc('memo-blog.tabs.product')">
+                                    {{ $tc('memo-blog.tabs.product') }}
+                                </sw-tabs-item>
+                            {% endblock %}
+                        </sw-tabs>
+                    {% endblock %}
+
+                    {% block memo_blog_detail_content_view %}
+                        <router-view v-if="blog"
+                                     :blog="blog"
+                                     :blogEditMode="editMode"
+                                     :isLoading="isLoading">
+                        </router-view>
+                    {% endblock %}
+                </sw-card-view>
+            </template>
+        {% endblock %}
+    </sw-page>
+{% endblock %}

@@ -1,0 +1,8 @@
+{% block sw_cms_el_memo_newest_blog %}
+    {% set blog = element.data %}
+
+    <h1>{{ blog.name}}</h1>
+    <div>{{ blog.text}}</div>
+
+    {{ dump(blog) }}
+{% endblock %}

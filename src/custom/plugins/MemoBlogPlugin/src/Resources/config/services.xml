@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="Memo\BlogPlugin\Core\Content\Blog\BlogDefinition">
+            <tag name="shopware.entity.definition"/>
+            <tag name="shopware.composite_search.definition" priority="1500"/>
+        </service>
+
+        <service id="Memo\BlogPlugin\Controller\Storefront\BlogController" public="true">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+            <argument type="service" id="Memo\BlogPlugin\Page\Blog\BlogListingPageLoader"/>
+            <argument type="service" id="Memo\BlogPlugin\Page\BlogDetail\BlogDetailPageLoader"/>
+        </service>
+
+        <service id="Memo\BlogPlugin\Page\Blog\BlogListingPageLoader">
+            <argument type="service" id="Shopware\Storefront\Page\GenericPageLoader"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="memo_blog.repository"/>
+        </service>
+
+        <service id="Memo\BlogPlugin\Page\BlogDetail\BlogDetailPageLoader">
+            <argument type="service" id="Shopware\Storefront\Page\GenericPageLoader"/>
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="memo_blog.repository"/>
+        </service>
+
+        <service id="Memo\BlogPlugin\Core\Content\Product\ProductExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="Memo\BlogPlugin\Core\Content\Blog\BlogProductMappingDefinition">
+            <tag name="shopware.entity.definition" entity="memo_blog_product"/>
+        </service>
+
+        <service id="Memo\BlogPlugin\Core\Content\Blog\Cms\BlogNewestResolver">
+            <argument type="service" id="memo_blog.repository"/>
+            <tag name="shopware.cms.data_resolver" />
+        </service>
+    </services>
+</container>

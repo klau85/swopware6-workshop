@@ -1,0 +1,34 @@
+<?php declare(strict_types=1);
+
+namespace Memo\BlogPlugin\Migration;
+
+use Doctrine\DBAL\Connection;
+use Shopware\Core\Framework\Migration\MigrationStep;
+
+class Migration1653909018 extends MigrationStep
+{
+    public function getCreationTimestamp(): int
+    {
+        return 1653909018;
+    }
+
+    public function update(Connection $connection): void
+    {
+        $sql = "CREATE TABLE IF NOT EXISTS `memo_blog` (
+    `id` BINARY(16) NOT NULL,
+    `name` VARCHAR(255) NULL,
+    `date` DATETIME(3) NULL,
+    `text` LONGTEXT NULL,
+    `active` TINYINT(1) NULL,
+    `created_at` DATETIME(3) NOT NULL,
+    `updated_at` DATETIME(3) NULL,
+    PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+
+        $connection->executeStatement($sql);
+    }
+
+    public function updateDestructive(Connection $connection): void
+    {
+        // implement update destructive
+    }
+}

@@ -1,0 +1,52 @@
+{%  block memo_blog_create %}
+    <sw-page class="memo-blog-create">
+
+        {% block memo_blog_create_header %}
+            <template #smart-bar-header>
+                <h2>{{ blogTitle() }}</h2>
+            </template>
+        {% endblock %}
+
+        {% block memo_blog_create_actions %}
+            <template #smart-bar-actions>
+                <sw-button-process
+                    class="memo-blog-create__save-action"
+                    :isLoading="isLoading"
+                    :disabled="isLoading"
+                    :processSuccess="isSaveSuccessful"
+                    variant="primary"
+                    @process-finish="saveFinish"
+                    @click.prevent="onSave">
+
+                    {{ $t('memo-blog.button.save') }}
+                </sw-button-process>
+            </template>
+        {% endblock %}
+
+        {% block memo_blog_create_content %}
+            <template #content>
+                <sw-card-view>
+                    <sw-card :title="$t('memo-blog.card.general')">
+                        {% block memo_blog_create_base_form %}
+                            <sw-text-field v-model="blog.name"
+                                           :label="$t('memo-blog.label.name')"/>
+
+                            <sw-container columns="1fr 1fr" gap="32px">
+                                <sw-datepicker v-model="blog.date"
+                                               :label="$t('memo-blog.label.date')"
+                                               dateType="datetime"
+                                />
+
+                                <sw-switch-field v-model="blog.active"
+                                                 :label="$t('memo-blog.label.active')"/>
+                            </sw-container>
+
+                            <sw-text-editor v-model="blog.text"
+                                            :label="$t('memo-blog.label.text')"/>
+                        {% endblock %}
+                    </sw-card>
+                </sw-card-view>
+            </template>
+        {% endblock %}
+    </sw-page>
+{% endblock %}

@@ -1,0 +1,2 @@
+RequestHeader add hot-reload-mode 1
+RequestHeader add hot-reload-port 9999

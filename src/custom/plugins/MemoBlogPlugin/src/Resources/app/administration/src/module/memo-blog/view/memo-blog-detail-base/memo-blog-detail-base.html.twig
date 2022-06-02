@@ -1,0 +1,39 @@
+{% block memo_blog_detail_base %}
+    <div class="memo-blog-detail-base">
+        {% block memo_blog_detail_base_info_holder %}
+            <div class="memo-blog-detail-base__info-holder">
+
+                <template v-if="!blogEditMode">
+                    {% block memo_blog_detail_base_info_card %}
+                        <sw-card :title="blog.name">
+                            <sw-time-ago :date="blog.date"/>
+                            <div v-html="blog.text"></div>
+                        </sw-card>
+                    {% endblock %}
+                </template>
+
+                <template v-else>
+                    {% block memo_blog_detail_base_form %}
+                        <sw-card :title="$t('memo-blog.card.general')">
+                            <sw-text-field v-model="blog.name"
+                                           :label="$t('memo-blog.label.name')"/>
+
+                            <sw-container columns="1fr 1fr" gap="32px">
+                                <sw-datepicker v-model="blog.date"
+                                               :label="$t('memo-blog.label.date')"
+                                               dateType="datetime"
+                                />
+
+                                <sw-switch-field v-model="blog.active"
+                                                 :label="$t('memo-blog.label.active')"/>
+                            </sw-container>
+
+                            <sw-text-editor v-model="blog.text"
+                                            :label="$t('memo-blog.label.text')"/>
+                        </sw-card>
+                    {% endblock %}
+                </template>
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

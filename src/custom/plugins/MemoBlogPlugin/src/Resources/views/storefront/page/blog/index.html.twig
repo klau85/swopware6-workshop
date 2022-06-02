@@ -1,0 +1,20 @@
+{% sw_extends '@Storefront/storefront/base.html.twig' %}
+
+{% block base_content %}
+
+    Hello World
+
+    <ul>
+
+        {% for blog in page.blogs %}
+
+            <li>
+                <a href="{{ path('storefront.memo_blog.blogs.detail', {blogId: blog.id}) }}">
+                    {{ blog.name }}
+                </a>
+            </li>
+
+        {% endfor %}
+    </ul>
+
+{% endblock %}

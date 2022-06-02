@@ -1,0 +1,14 @@
+@import "~scss/variables";
+
+$memo-blog-list-color-error: $color-crimson-500;
+$memo-blog-list-color-success: $color-emerald-500;
+
+.memo-blog-list {
+    .is--inactive {
+        color: $memo-blog-list-color-error;
+    }
+
+    .is--active {
+        color: $memo-blog-list-color-success;
+    }
+}

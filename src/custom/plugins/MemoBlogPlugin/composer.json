@@ -1,0 +1,31 @@
+{
+  "name": "memo/blog-plugin",
+  "description": "Demo plugin for training",
+  "version": "1.0.0",
+  "type": "shopware-platform-plugin",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Memo"
+    }
+  ],
+  "require": {
+    "shopware/core": "6.4.*"
+  },
+  "extra": {
+    "shopware-plugin-class": "Memo\\BlogPlugin\\MemoBlogPlugin",
+    "label": {
+      "de-DE": "Plugin Demo DE",
+      "en-GB": "Plugin Demo EN"
+    },
+    "description": {
+      "de-DE": "This is the German description",
+      "en-GB": "This is the Englisch description"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Memo\\BlogPlugin\\": "src/"
+    }
+  }
+}

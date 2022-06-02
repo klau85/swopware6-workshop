@@ -1,0 +1,74 @@
+{
+    "global": {
+        "entities": {
+            "memo_blog": "Blog | Blogs"
+        }
+    },
+    "memo-blog": {
+        "button": {
+            "add": "Add blog",
+            "cancel": "Cancel",
+            "delete": "Delete",
+            "edit": "Edit",
+            "save": "Save"
+        },
+        "general": {
+            "title": "Blogs",
+            "description": "Manage blogs here",
+            "searchBar": {
+                "placeholder": "Search blogs..."
+            },
+            "save": {
+                "success": {
+                    "title": "Success",
+                    "message": "Blog \"{name}\" has been saved."
+                },
+                "error": {
+                    "title": "Error",
+                    "message": "Blog could not be saved."
+                }
+            }
+        },
+        "list": {
+            "column": {
+                "name": "Name",
+                "date": "Date",
+                "active": "Active"
+            },
+            "contextMenu": {
+                "view": "View blog",
+                "edit": "Edit blog",
+                "delete": "Delete blog"
+            },
+            "empty": "No blogs",
+            "sidebar": {
+                "refresh": "Refresh list"
+            },
+            "text": {
+                "header": {
+                    "title": "Blogs"
+                },
+                "modal": {
+                    "title": "Delete blog?",
+                    "description": "Are you sure you want to delete \"%name%\"?"
+                }
+            }
+        },
+        "menu": {
+            "index": "Blogs"
+        },
+        "title": "New blog",
+        "card": {
+            "general": "General"
+        },
+        "label": {
+            "name": "Name",
+            "date": "Date",
+            "active": "Active",
+            "text": "Text"
+        },
+        "tabs": {
+            "general": "General"
+        }
+    }
+}

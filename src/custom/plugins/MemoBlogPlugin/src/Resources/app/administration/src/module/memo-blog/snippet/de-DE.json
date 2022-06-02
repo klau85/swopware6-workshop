@@ -1,0 +1,74 @@
+{
+    "global": {
+        "entities": {
+            "memo_blog": "Blog | Blogs"
+        }
+    },
+    "memo-blog": {
+        "button": {
+            "add": "Blog aanmaken",
+            "cancel": "Annuleren",
+            "delete": "Verwijderen",
+            "edit": "Bewerken",
+            "save": "Opslaan"
+        },
+        "general": {
+            "title": "Blogs",
+            "description": "Beheer van blogs",
+            "searchBar": {
+                "placeholder": "Doorzoek alle blogs..."
+            },
+            "save": {
+                "success": {
+                    "title": "Succes",
+                    "message": "Blog \"{name}\" is opgeslagen."
+                },
+                "error": {
+                    "title": "Error",
+                    "message": "Auction kon niet worden opgeslagen."
+                }
+            }
+        },
+        "list": {
+            "column": {
+                "name": "Naam",
+                "client": "Opdrachtgever",
+                "active": "Actief"
+            },
+            "contextMenu": {
+                "view": "Bekijk blog",
+                "edit": "Bewerk blog",
+                "delete": "Verwijder blog"
+            },
+            "empty": "Geen blogs",
+            "sidebar": {
+                "refresh": "Ververs lijst"
+            },
+            "text": {
+                "header": {
+                    "title": "Blogs"
+                },
+                "modal": {
+                    "title": "Blog verwijderen?",
+                    "description": "Weet je zeker dat je \"%name%\" wilt verwijderen?"
+                }
+            }
+        },
+        "menu": {
+            "index": "Blogs"
+        },
+        "title": "Nieuwe blog",
+        "card": {
+            "general": "Algemeen"
+        },
+        "label": {
+            "name": "Naam",
+            "date": "Datum",
+            "active": "Actief",
+            "text": "Tekst"
+        },
+        "tabs": {
+            "general": "Algemeen"
+        }
+    }
+}
